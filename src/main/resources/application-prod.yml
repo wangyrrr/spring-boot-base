@@ -1,0 +1,30 @@
+server:
+  port: 2003
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/vote?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: pinuser
+    password: xdp170620
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 64
+      max-wait: 1200
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password:
+    timeout: 2000
+    lettuce:
+      shutdown-timeout: 100
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 30
+        min-idle: 0
+
