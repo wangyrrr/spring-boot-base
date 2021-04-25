@@ -35,13 +35,3 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   mapper-locations:
     - classpath:/mapper/**/**.xml
-
-qywx:
-  corpId: wxcc62e7701c249c74
-  secret: 2LWfP-Diy4Rf2A5ReRaIJ88P-oRVrSs4aVHHj5RmKmo
-  agentId: 1000001
-  token: 111
-  aesKey: 111
-
-service:
-  domain: http://gktdby.natappfree.cc
