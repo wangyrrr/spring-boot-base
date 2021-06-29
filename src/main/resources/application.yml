@@ -30,8 +30,8 @@ spring:
 
 wx:
   mini-program:
-    appid: wx877c32cb01b0c0cc
-    secret: 6e6dea466772b099573098d5bf83c68a
+    appid: 111
+    secret: 111
 
 sys:
   redisson:
