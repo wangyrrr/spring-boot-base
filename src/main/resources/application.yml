@@ -22,7 +22,24 @@ spring:
         reset-enable: false
         login-username: druid
         login-password: druid
+  jackson:
+    #  格式化返回时间 yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
+
+wx:
+  mini-program:
+    appid: wx877c32cb01b0c0cc
+    secret: 6e6dea466772b099573098d5bf83c68a
+
+sys:
+  redisson:
+    enabled: true
+    type: STANDALONE
+    address: 127.0.0.1:6379
+    password:
+    database: 0
 
 
 server:
