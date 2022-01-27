@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 统一异常定义
  * @Author: WangYuanrong
  * @Date: 2021/4/7 11:04
  */

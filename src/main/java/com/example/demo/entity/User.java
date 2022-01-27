@@ -11,10 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
  * 用户
- * </p>
- *
  * @author WangYuanrong
  * @since 2021-06-18
  */

@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 防重复提交注解
  * @Author: WangYuanrong
  * @Date: 2021/6/24 9:36
  */
