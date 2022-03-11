@@ -135,7 +135,7 @@ public class RedissonLockClient {
     public void unlock(String lockName) {
         try {
             final RLock lock = redissonClient.getLock(lockName);
-            if (lock.isLocked()) {
+            if (lock.isLocked() && lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }
         } catch (Exception e) {
