@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 
 import com.example.demo.common.Constant;
-import com.example.demo.common.Result;
 import com.example.demo.entity.User;
 import com.example.demo.sesrvice.IUserService;
 import io.swagger.annotations.Api;
@@ -45,7 +44,7 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "授权登录")
     @GetMapping("/login")
-    public Result<User> login(String code, HttpServletRequest request, HttpServletResponse response) {
+    public User login(String code, HttpServletRequest request, HttpServletResponse response) {
         log.info("code:{}", code);
 //        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + secret + "&js_code=" + code + "&grant_type=authorization_code";
 //        String result = HttpUtils.get(url);
@@ -77,7 +76,7 @@ public class UserController extends BaseController {
 //        response.setHeader("Authorization", jws);
         HttpSession session = request.getSession();
         session.setAttribute(Constant.LOGIN_USER, user);
-        return Result.response(user);
+        return user;
     }
 
 

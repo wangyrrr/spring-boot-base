@@ -10,7 +10,7 @@ public final class Constant {
     /**
      * 登录用户redis session key
      */
-    public static final String LOGIN_USER = "loginUser";
+    public static final String LOGIN_USER = "loginUser:";
 
     /**
      * redis key

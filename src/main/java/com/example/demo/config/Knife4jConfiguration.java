@@ -23,8 +23,6 @@ public class Knife4jConfiguration {
                 .apiInfo(new ApiInfoBuilder()
                         //.title("swagger-bootstrap-ui-demo RESTful APIs")
                         .description("API接口文档")
-                        .termsOfServiceUrl("http://127.0.0.1:8080")
-                        .contact("wang.yuanrong@qq.com")
                         .version("1.0")
                         .build())
                 //分组名称

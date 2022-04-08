@@ -176,7 +176,7 @@
         <logger name="com.alibaba.cloud.dubbo.metadata" level="ERROR" additivity="false">
             <appender-ref ref="ErrorFile"/>
         </logger>
-        <logger name="com.alibaba.nacos.client" level="WARN" additivity="false"></logger>
+        <logger name="com.alibaba.nacos.client" level="WARN" additivity="false"/>
         <logger name="com.netflix" level="ERROR" additivity="false"><appender-ref ref="ErrorFile"/></logger>
 
         <!-- 设置打印sql语句配置结束 -->

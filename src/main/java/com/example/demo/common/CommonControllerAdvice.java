@@ -1,7 +1,5 @@
-package com.example.demo.controller;
+package com.example.demo.common;
 
-import com.example.demo.common.ApiException;
-import com.example.demo.common.Result;
 import com.example.demo.enums.ResultCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +26,6 @@ public class CommonControllerAdvice {
     /**
      * 全局异常捕捉处理
      * 返回状态码:500
-     *
      * @param ex
      * @return
      */
@@ -51,7 +48,6 @@ public class CommonControllerAdvice {
 
     /**
      * 返回状态码:415
-     *
      * @param ex
      * @return
      */
@@ -66,7 +62,6 @@ public class CommonControllerAdvice {
     /**
      * 自定义异常处理
      * 返回状态码: 500
-     *
      * @param ex
      * @return
      */
@@ -82,7 +77,6 @@ public class CommonControllerAdvice {
     /**
      * MethodArgumentNotValidException异常处理返回json
      * 返回状态码:400
-     *
      * @param ex
      * @return
      */
@@ -101,7 +95,6 @@ public class CommonControllerAdvice {
     /**
      * IllegalArgumentException异常处理返回json
      * 返回状态码:400
-     *
      * @param ex
      * @return
      */
@@ -121,7 +114,6 @@ public class CommonControllerAdvice {
 
     /**
      * 返回状态码:400
-     *
      * @param ex
      * @return
      */
@@ -136,7 +128,7 @@ public class CommonControllerAdvice {
         log.error(msg, ex);
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            log.error(new StringBuilder().append("异常报告:-------------------------- {} --------------------------\n异常信息:{}\n异常类:{}\n异常方法:{}\n异常行数:{}").toString(),
+            log.error("异常报告:-------------------------- {} --------------------------\n异常信息:{}\n异常类:{}\n异常方法:{}\n异常行数:{}",
                     format.format(new Date()),
                     ex.getMessage(),
                     ex.getStackTrace()[0].getClassName(),

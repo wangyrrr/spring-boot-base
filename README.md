@@ -11,3 +11,5 @@ Mybatis Plus
 Spring Data Redis  
 Redisson  
 
+todo:
+异步日志

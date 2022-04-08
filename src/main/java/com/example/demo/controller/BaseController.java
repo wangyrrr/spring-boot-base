@@ -3,8 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.common.ApiException;
 import com.example.demo.common.Constant;
 import com.example.demo.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseController {
 
-    @Autowired
+    @Resource
     private HttpServletRequest request;
 
+    /**
+     * 从session中获取登录用户，适用于spring session环境
+     * @return
+     */
     protected Long getUserId() {
         Object attribute = request.getSession().getAttribute(Constant.LOGIN_USER);
         if (attribute == null) {

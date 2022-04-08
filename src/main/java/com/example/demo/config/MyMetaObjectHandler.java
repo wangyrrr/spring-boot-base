@@ -15,11 +15,20 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-//        this.strictInsertFill(metaObject, "createTime", Date.class, new Date()); // 起始版本 3.3.0(推荐使用)
+        this.strictInsertFill(metaObject, "createBy", Long.class, this.getLoginUser());
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-//        this.strictUpdateFill(metaObject, "updateTime", Date.class, new Date()); // 起始版本 3.3.0(推荐)
+        this.strictUpdateFill(metaObject, "updateBy", Long.class, this.getLoginUser());
+    }
+
+    private Long getLoginUser() {
+        try {
+            return 0L;
+        } catch (Exception e) {
+            log.warn("元数据填充获取登录用户异常", e);
+        }
+        return null;
     }
 }

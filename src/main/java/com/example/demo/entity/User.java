@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -26,13 +28,31 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    /**
+     * 创建人
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Long createBy;
+
+    /**
+     * 创建日期
+     */
+    private Date createTime;
+
+    /**
+     * 更新人
+     */
+    @TableField(fill = FieldFill.UPDATE)
+    private Long updateBy;
+
+    /**
+     * 更新日期
+     */
+    private Date updateTime;
+
+
     private String openId;
 
     private String unionId;
-
-    private Date createTime;
-
-    private Date updateTime;
-
 
 }
