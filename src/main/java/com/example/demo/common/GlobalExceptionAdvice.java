@@ -21,7 +21,7 @@ import java.util.List;
 
 @Slf4j
 @ControllerAdvice
-public class CommonControllerAdvice {
+public class GlobalExceptionAdvice {
 
     /**
      * 全局异常捕捉处理

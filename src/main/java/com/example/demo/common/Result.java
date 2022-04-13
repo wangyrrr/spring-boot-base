@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * 统一结果返回定义
  * @Author: WangYuanrong
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @ApiModel(value = "返回实体")
-public class Result<T> {
+public class Result<T> implements Serializable {
 
     @ApiModelProperty(value = "提示信息")
     private String msg;

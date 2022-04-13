@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class PageParam {
 
     @ApiModelProperty(value = "当前页，从1开始")
-    private int current;
+    private int current = 1;
 
     @ApiModelProperty(value = "每页条数")
     private int size = 10;
