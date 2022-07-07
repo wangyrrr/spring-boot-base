@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -73,9 +78,19 @@ public class GlobalExceptionAdvice {
     }
 
 
+    /**
+     * spring默认上传大小100MB 超出大小捕获异常MaxUploadSizeExceededException
+     */
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public Result handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
+        return defHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(), "文件大小超出限制, 请压缩或降低文件质量!", ex);
+    }
+
 
     /**
-     * MethodArgumentNotValidException异常处理返回json
+     * MethodArgumentNotValidException异常处理返回json （@Valid校验）
      * 返回状态码:400
      * @param ex
      * @return
@@ -91,6 +106,26 @@ public class GlobalExceptionAdvice {
         });
         return defHandler(ResultCodeEnum.FAIL.getCode(), errorMsg.toString(), ex);
     }
+
+
+    /**
+     * 全局处理参数校验异常（@Validated校验）
+     * @param e
+     * @return
+     */
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Result validationBodyException(ConstraintViolationException e) {
+        HashSet<ConstraintViolation<?>> set = (HashSet<ConstraintViolation<?>>) e.getConstraintViolations();
+        final ArrayList<String> errorMsg = new ArrayList<>();
+        set.forEach(c -> {
+            errorMsg.add(c.getPropertyPath() + ": " + c.getMessageTemplate());
+        });
+        String message = "[" + String.join("; ", errorMsg) + "]";
+        return defHandler(ResultCodeEnum.FAIL.getCode(), message, e);
+    }
+
 
     /**
      * IllegalArgumentException异常处理返回json

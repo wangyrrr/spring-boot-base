@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Redis连接方式
+ * Redisson Redis连接方式
  */
 @Getter
 @AllArgsConstructor

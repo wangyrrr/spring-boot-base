@@ -10,6 +10,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
+ * knife4j配置，有Yapi条件建议使用Yapi
  * @Author: WangYuanrong
  * @Date: 2021/4/7 17:01
  */

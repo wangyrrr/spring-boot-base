@@ -20,8 +20,6 @@ import org.springframework.util.Assert;
 @Slf4j
 public class RedissonManager {
 
-    private Config config = new Config();
-
     private RedissonClient redisson = null;
 
     public RedissonManager() {
@@ -32,7 +30,7 @@ public class RedissonManager {
         Boolean enabled = redissonProperties.getEnabled();
         if (enabled) {
             try {
-                config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
+                Config config = RedissonConfigFactory.getInstance().createConfig(redissonProperties);
                 redisson = Redisson.create(config);
             } catch (Exception e) {
                 log.error("Redisson初始化错误", e);
@@ -53,17 +51,17 @@ public class RedissonManager {
         private RedissonConfigFactory() {
         }
 
-        private static volatile RedissonConfigFactory factory = null;
+        private static volatile RedissonConfigFactory FACTORY = null;
 
         public static RedissonConfigFactory getInstance() {
-            if (factory == null) {
+            if (FACTORY == null) {
                 synchronized (Object.class) {
-                    if (factory == null) {
-                        factory = new RedissonConfigFactory();
+                    if (FACTORY == null) {
+                        FACTORY = new RedissonConfigFactory();
                     }
                 }
             }
-            return factory;
+            return FACTORY;
         }
 
         /**

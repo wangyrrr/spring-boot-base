@@ -18,8 +18,6 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedissonConfiguration {
 
-
-
 	@Bean
 	@ConditionalOnMissingBean(RedissonClient.class)
 	public RedissonClient redissonClient(RedissonProperties redissonProperties) {

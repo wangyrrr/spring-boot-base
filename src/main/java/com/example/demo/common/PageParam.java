@@ -11,9 +11,15 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "分页查询入参")
 public class PageParam {
 
+    /**
+     * 当前页，从1开始
+     */
     @ApiModelProperty(value = "当前页，从1开始")
     private int current = 1;
 
+    /**
+     * 每页条数
+     */
     @ApiModelProperty(value = "每页条数")
     private int size = 10;
 

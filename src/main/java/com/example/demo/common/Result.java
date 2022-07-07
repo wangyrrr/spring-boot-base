@@ -22,12 +22,22 @@ import java.io.Serializable;
 @ApiModel(value = "返回实体")
 public class Result<T> implements Serializable {
 
+    /**
+     * 提示信息
+     */
     @ApiModelProperty(value = "提示信息")
     private String msg;
 
+    /**
+     * 状态码，200表示成功，非200表示错误，提示用户返回的提示信息
+     * todo 使用java开发手册统一错误码规范
+     */
     @ApiModelProperty(value = "状态码，200表示成功，非200表示错误，提示用户返回的提示信息")
     private Integer code;
 
+    /**
+     * 响应数据
+     */
     @ApiModelProperty(value = "响应数据")
     private T data;
 

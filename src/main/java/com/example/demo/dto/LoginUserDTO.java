@@ -12,5 +12,24 @@ import java.io.Serializable;
 @Data
 public class LoginUserDTO implements Serializable {
 
+    /**
+     * 租户id
+     */
+    private Long tenantId;
+
+    /**
+     * 用户id
+     */
     private Long userId;
+
+    /**
+     * 用户账号
+     */
+    private String userAccount;
+
+    /**
+     * 姓名
+     */
+    private String userName;
+
 }

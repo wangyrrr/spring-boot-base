@@ -34,14 +34,11 @@ public class LoginUserMethodArgumentResolver implements HandlerMethodArgumentRes
      */
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        LoginUser loginUser = methodParameter.getParameterAnnotation(LoginUser.class);
-        if (loginUser != null) {
-            String token = nativeWebRequest.getHeader("Authorization");
-            if (StringUtils.isBlank(token)) {
-                throw new ApiException(ResultCodeEnum.UNAUTHORIZED);
-            }
-            // todo 解析校验jwt获取用户信息
+        String token = nativeWebRequest.getHeader("Authorization");
+        if (StringUtils.isBlank(token)) {
+            throw new ApiException(ResultCodeEnum.UNAUTHORIZED);
         }
+        // todo 解析校验jwt获取用户信息, return
         return null;
     }
 
