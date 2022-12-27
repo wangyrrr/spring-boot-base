@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @TableName("tb_user")
 @ApiModel(value="User对象", description="用户")
-public class User extends BaseCreatorEntity {
+public class User extends BaseEntity {
 
     private String openId;
 

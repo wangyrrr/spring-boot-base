@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -34,5 +35,18 @@ public abstract class BaseEntity implements Serializable {
      * 更新日期
      */
     private Date updateTime;
+
+    /**
+     * 创建人
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Long createBy;
+
+    /**
+     * 更新人
+     */
+    @TableField(fill = FieldFill.UPDATE)
+    private Long updateBy;
+
 
 }
