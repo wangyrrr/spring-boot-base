@@ -21,4 +21,9 @@ public final class Constant {
      * redis 连接前缀
      */
     public static final String REDIS_CONNECTION_PREFIX = "redis://";
+
+    /**
+     * 队列
+     */
+    public static final String EXAMPLE_QUEUE = "exampleQueue";
 }

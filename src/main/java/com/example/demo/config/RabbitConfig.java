@@ -1,6 +1,8 @@
 package com.example.demo.config;
 
+import com.example.demo.common.Constant;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,13 @@ public class RabbitConfig {
 //    }
 //
 
+    /**
+     * 队列
+     */
+    @Bean
+    public Queue exampleQueue() {
+        return new Queue(Constant.EXAMPLE_QUEUE, true);
+    }
 
 
 
