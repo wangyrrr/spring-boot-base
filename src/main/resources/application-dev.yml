@@ -7,6 +7,9 @@ spring:
     url: jdbc:mysql://localhost:3306/vote?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: root
+  elasticsearch:
+    rest:
+      uris: 192.168.127.129:9200
   redis:
     host: 127.0.0.1
     port: 6379
@@ -21,11 +24,15 @@ spring:
         max-wait: 30
         min-idle: 0
   rabbitmq:
-    host: 127.0.0.1
+    host: 175.178.255.153
     port: 5672
-    username: guest
-    password: guest
-    virtual-host:
+    username: wet
+    password: wet2022
+    virtual-host: dev
+    listener:
+      simple:
+        prefetch: 1
+        acknowledge-mode: manual
 
 
 mybatis-plus:

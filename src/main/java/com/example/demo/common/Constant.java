@@ -25,5 +25,5 @@ public final class Constant {
     /**
      * 队列
      */
-    public static final String EXAMPLE_QUEUE = "exampleQueue";
+    public static final String EXAMPLE_QUEUE = "testBaseQueue";
 }
