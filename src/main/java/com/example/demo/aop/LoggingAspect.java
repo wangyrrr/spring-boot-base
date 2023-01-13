@@ -16,8 +16,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -54,7 +58,13 @@ public class LoggingAspect {
         log.info("【URL】：{}", request.getRequestURL());
         log.info("【IP】：{}", request.getRemoteAddr());
         log.info("【Class】：{}，【Method】：{}", point.getSignature().getDeclaringTypeName(), point.getSignature().getName());
-        log.info("【Payload】：{}，", JSON.toJSONString(point.getArgs()));
+        if (point.getArgs() != null) {
+            final List<Object> args = Arrays.stream(point.getArgs())
+                    .filter(s -> !(s instanceof HttpServletRequest))
+                    .filter(s -> !(s instanceof HttpServletResponse))
+                    .collect(Collectors.toList());
+            log.info("【Payload】：{}，", JSON.toJSONString(args));
+        }
         Map<String, String[]> parameterMap = request.getParameterMap();
         log.info("【Parameters】：{}，", JSON.toJSONString(parameterMap));
         Long start = System.currentTimeMillis();
