@@ -1,7 +1,9 @@
 package com.example.demo.sesrvice;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.demo.entity.User;
+import com.example.demo.query.UserQuery;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.example.demo.entity.User;
  * @since 2021-06-18
  */
 public interface IUserService extends IService<User> {
+
+    Page<User> page(UserQuery userQuery);
 
 }

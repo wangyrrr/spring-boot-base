@@ -21,6 +21,15 @@ import java.io.Serializable;
 @Builder
 @ApiModel(value = "返回实体")
 public class Result<T> implements Serializable {
+    @ApiModelProperty(value = "成功标识")
+    private Boolean success;
+
+    /**
+     * 状态码，0表示成功，非0表示错误，提示用户返回的提示信息
+     * todo 使用java开发手册统一错误码规范
+     */
+    @ApiModelProperty(value = "状态码，200表示成功，非200表示错误，提示用户返回的提示信息")
+    private Integer code;
 
     /**
      * 提示信息
@@ -29,21 +38,15 @@ public class Result<T> implements Serializable {
     private String msg;
 
     /**
-     * 状态码，200表示成功，非200表示错误，提示用户返回的提示信息
-     * todo 使用java开发手册统一错误码规范
-     */
-    @ApiModelProperty(value = "状态码，200表示成功，非200表示错误，提示用户返回的提示信息")
-    private Integer code;
-
-    /**
      * 响应数据
      */
     @ApiModelProperty(value = "响应数据")
     private T data;
 
 
-    public static <T> Result<T> response() {
+    public static <T> Result<T> ok() {
         Result<T> res = new Result<>();
+        res.setSuccess(Boolean.TRUE);
         res.setCode(ResultCodeEnum.SUCCESS.getCode());
         res.setMsg(ResultCodeEnum.SUCCESS.getMsg());
         return res;
@@ -56,8 +59,9 @@ public class Result<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static <T> Result<T> response(T data) {
+    public static <T> Result<T> ok(T data) {
         Result<T> res = new Result<>();
+        res.setSuccess(Boolean.TRUE);
         res.setCode(ResultCodeEnum.SUCCESS.getCode());
         res.setMsg(ResultCodeEnum.SUCCESS.getMsg());
         res.setData(data);
@@ -75,6 +79,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> response(ResultCodeEnum resultCodeEnum, T data) {
         Result<T> res = new Result<>();
         res.setCode(resultCodeEnum.getCode());
+        res.setSuccess(resultCodeEnum.getCode() == 0);
         res.setMsg(resultCodeEnum.getMsg());
         res.setData(data);
         return res;
@@ -83,6 +88,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> response(ResultCodeEnum resultCodeEnum) {
         Result<T> res = new Result<>();
         res.setCode(resultCodeEnum.getCode());
+        res.setSuccess(resultCodeEnum.getCode() == 0);
         res.setMsg(resultCodeEnum.getMsg());
         return res;
     }
@@ -99,6 +105,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> response(Integer code, String msg, T data) {
         Result<T> res = new Result<>();
         res.setCode(code);
+        res.setSuccess(code != null && code == 0);
         res.setMsg(msg);
         res.setData(data);
         return res;
@@ -114,6 +121,7 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> exception(Integer code, String msg) {
         Result<T> res = new Result<>();
+        res.setSuccess(Boolean.FALSE);
         res.setCode(code);
         res.setMsg(msg);
         return res;

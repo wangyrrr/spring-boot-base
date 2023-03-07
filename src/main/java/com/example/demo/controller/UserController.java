@@ -1,20 +1,25 @@
 package com.example.demo.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Constant;
+import com.example.demo.common.PageResult;
+import com.example.demo.common.Result;
+import com.example.demo.entity.BaseEntity;
 import com.example.demo.entity.User;
+import com.example.demo.query.UserQuery;
 import com.example.demo.sesrvice.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -41,6 +46,42 @@ public class UserController extends BaseController {
 
     @Autowired
     private IUserService userService;
+
+    @PostMapping
+    public Result<Boolean> insert(@RequestBody User user) {
+        user.setStatus(1);
+        userService.save(user);
+        return Result.ok();
+    }
+
+    @PutMapping
+    public Result<Boolean> update(@RequestBody User user) {
+        userService.updateById(user);
+        return Result.ok();
+    }
+
+    @GetMapping("/{id}")
+    public Result<User> findById(@PathVariable Long id) {
+        return Result.ok(userService.getById(id));
+    }
+
+    @GetMapping("/page")
+    public PageResult<List<User>> page(UserQuery userQuery) {
+        Page<User> page = userService.page(userQuery);
+        return PageResult.ok(page.getRecords(), page.getTotal());
+    }
+
+    @DeleteMapping("/{id}")
+    public Result<Boolean> remove(@PathVariable Long id) {
+        userService.removeById(id);
+        return Result.ok();
+    }
+
+    @PatchMapping("/{id}")
+    public Result<Boolean> updateStatus(@PathVariable Long id, @RequestParam Integer status) {
+        userService.update(new LambdaUpdateWrapper<User>().eq(BaseEntity::getId, id).set(User::getStatus, status));
+        return Result.ok();
+    }
 
     @ApiOperation(value = "授权登录")
     @GetMapping("/login")

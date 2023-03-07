@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/vote?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://localhost:3306/spring_boot_base?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: root
   elasticsearch:
@@ -23,16 +23,16 @@ spring:
         max-idle: 8
         max-wait: 30
         min-idle: 0
-  rabbitmq:
-    host: 175.178.255.153
-    port: 5672
-    username: wet
-    password: wet2022
-    virtual-host: dev
-    listener:
-      simple:
-        prefetch: 1
-        acknowledge-mode: manual
+#  rabbitmq:
+#    host: 175.178.255.153
+#    port: 5672
+#    username: wet
+#    password: wet2022
+#    virtual-host: dev
+#    listener:
+#      simple:
+#        prefetch: 1
+#        acknowledge-mode: manual
 
 
 mybatis-plus:
