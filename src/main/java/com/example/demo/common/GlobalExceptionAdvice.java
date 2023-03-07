@@ -35,7 +35,7 @@ public class GlobalExceptionAdvice {
      * @return
      */
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = Exception.class)
     public Result errorHandler(Exception ex) {
         return defHandler(ResultCodeEnum.ERROR.getCode(), ResultCodeEnum.ERROR.getMsg(), ex);
@@ -71,7 +71,7 @@ public class GlobalExceptionAdvice {
      * @return
      */
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = ApiException.class)
     public Result handleException(ApiException ex) {
         return defHandler(ex.getCode(), ex.getMessage(), ex);
@@ -82,10 +82,10 @@ public class GlobalExceptionAdvice {
      * spring默认上传大小100MB 超出大小捕获异常MaxUploadSizeExceededException
      */
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public Result handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
-        return defHandler(HttpStatus.INTERNAL_SERVER_ERROR.value(), "文件大小超出限制, 请压缩或降低文件质量!", ex);
+        return defHandler(HttpStatus.OK.value(), "文件大小超出限制, 请压缩或降低文件质量!", ex);
     }
 
 

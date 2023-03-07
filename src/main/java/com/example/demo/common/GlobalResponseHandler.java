@@ -27,7 +27,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
         if (o instanceof Result) {
             return o;
         }
-        final Result<Object> result = Result.builder().code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).data(o).build();
+        final Result<Object> result = Result.builder().success(Boolean.TRUE).code(ResultCodeEnum.SUCCESS.getCode()).msg(ResultCodeEnum.SUCCESS.getMsg()).data(o).build();
         // 解决包装String包装统一返回类型问题 方式二
 //        if (o instanceof String) {
 //            return JSON.toJSONString(result);

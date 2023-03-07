@@ -35,19 +35,19 @@
 				<ul class="layui-nav layui-layout-right">
 					<li class="layui-nav-item layui-hide-xs"><a href="#" class="menuSearch layui-icon layui-icon-search"></a></li>
 					<li class="layui-nav-item layui-hide-xs"><a href="#" class="fullScreen layui-icon layui-icon-screen-full"></a></li>
-					<li class="layui-nav-item layui-hide-xs"><a href="http://www.pearadmin.com" class="layui-icon layui-icon-website"></a></li>
-					<li class="layui-nav-item layui-hide-xs message"></li>
+<!--					<li class="layui-nav-item layui-hide-xs"><a href="http://www.pearadmin.com" class="layui-icon layui-icon-website"></a></li>-->
+<!--					<li class="layui-nav-item layui-hide-xs message"></li>-->
 					<li class="layui-nav-item user">
 						<!-- 头 像 -->
 						<a class="layui-icon layui-icon-username" href="javascript:;"></a>
 						<!-- 功 能 菜 单 -->
 						<dl class="layui-nav-child">
-							<dd><a user-menu-url="view/system/person.html" user-menu-id="5555" user-menu-title="基本资料">基本资料</a></dd>
+<!--							<dd><a user-menu-url="view/system/person.html" user-menu-id="5555" user-menu-title="基本资料">基本资料</a></dd>-->
 							<dd><a href="javascript:void(0);" class="logout">注销登录</a></dd>
 						</dl>
 					</li>
 					<!-- 主 题 配 置 -->
-					<li class="layui-nav-item setting"><a href="#" class="layui-icon layui-icon-more-vertical"></a></li>
+<!--					<li class="layui-nav-item setting"><a href="#" class="layui-icon layui-icon-more-vertical"></a></li>-->
 				</ul>
 			</div>
 			<!-- 侧 边 区 域 -->
@@ -101,22 +101,42 @@
 				var admin = layui.admin;
 				var popup = layui.popup;
 				
+
+				// 检查登录状态
+				$.ajax({
+					url: '/user/info',
+					headers: {
+						Authorization: localStorage.getItem('token')
+					},
+					dataType: 'json',
+					type: 'get',
+					success: function(result) {
+						if (result.success) {
+							console.log('登录用户：', result.data)
+							localStorage.setItem('user', JSON.stringify(result.data))
+						} else {
+							window.location.href="/login"
+						}
+					}
+				})
+
 				admin.setConfigType("yml");
 				admin.setConfigPath("config/pear.config.yml");
-				
 				admin.render();
-				
-				// 登出逻辑 
+
+				// 登出逻辑
 				admin.logout(function(){
+					localStorage.removeItem('token')
+					localStorage.removeItem('user')
 					popup.success("注销成功",function(){
-						location.href = "login.html";
+						location.href = "login";
 					})
 					// 注销逻辑 返回 true / false
 					return true;
 				})
 				
 				// 消息点击回调
-				admin.message(function(id, title, context, form) {});
+				// admin.message(function(id, title, context, form) {});
 			})
 		</script>		
 	</body>

@@ -57,7 +57,8 @@ sys:
     address: 127.0.0.1:6379
     password:
     database: 0
-
+  auth:
+    jwtKey: 2162d3e65a421bc0ac76ae5acfe29c650becb73f2a9b8ce57941036331b1aaa8
 
 
 mybatis-plus:

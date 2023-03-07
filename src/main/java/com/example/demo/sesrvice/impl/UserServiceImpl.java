@@ -8,6 +8,7 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.query.UserQuery;
 import com.example.demo.sesrvice.IUserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,5 +30,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .eq(userQuery.getGender() != null, User::getGender, userQuery.getGender())
                 .like(StringUtils.isNotBlank(userQuery.getMobile()), User::getMobile, userQuery.getMobile());
         return this.page(new Page<>(userQuery.getPage(), userQuery.getLimit()), wrapper);
+    }
+
+    @Cacheable(value = "user", key = "#id")
+    @Override
+    public User getCache(Long id) {
+        return this.getById(id);
     }
 }

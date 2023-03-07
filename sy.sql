@@ -16,7 +16,8 @@ CREATE TABLE `sys_user` (
   `status` tinyint(2) unsigned default 1 NOT NULL COMMENT '状态，0：冻结，1：正常',
   `remark` varchar(32)  DEFAULT NULL COMMENT '备注',
   `deleted` tinyint(2) unsigned default 0 not null COMMENT '软删除，0：正常，1：已删除',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='系统用户表';
 
 

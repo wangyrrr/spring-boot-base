@@ -6,6 +6,18 @@
 </head>
 <body>
 
-  <h1 style="margin-left:50px">欢迎来到管理后台首页</h1>
+  <h1 style="margin-left:50px" id="h1"></h1>
+<script>
+    let str = '欢迎来到管理后台! ';
+    let user = localStorage.getItem('user');
+    if (user) {
+        let obj = JSON.parse(user)
+        console.log(obj)
+        if (obj.realName) {
+            str = str + '当前用户：' + obj.realName;
+        }
+    }
+    document.getElementById('h1').innerHTML = str;
+</script>
 </body>
 </html>

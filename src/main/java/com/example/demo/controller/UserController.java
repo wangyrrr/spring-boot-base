@@ -2,20 +2,25 @@ package com.example.demo.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Constant;
 import com.example.demo.common.PageResult;
 import com.example.demo.common.Result;
 import com.example.demo.entity.BaseEntity;
 import com.example.demo.entity.User;
+import com.example.demo.enums.ResultCodeEnum;
 import com.example.demo.query.UserQuery;
 import com.example.demo.sesrvice.IUserService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -46,6 +51,26 @@ public class UserController extends BaseController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private SecretKey key;
+
+    @GetMapping("/info")
+    public Result<User> info(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        if (StringUtils.isBlank(token)) {
+            return Result.response(ResultCodeEnum.UNAUTHORIZED);
+        }
+        Claims body;
+        try {
+            body = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+        } catch (Exception e) {
+            return Result.response(ResultCodeEnum.UNAUTHORIZED);
+        }
+        Object userId = body.get("userId");
+        User user = userService.getCache(Long.parseLong(userId.toString()));
+        return Result.ok(user);
+    }
 
     @PostMapping
     public Result<Boolean> insert(@RequestBody User user) {

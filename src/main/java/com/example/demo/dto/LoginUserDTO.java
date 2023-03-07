@@ -25,11 +25,11 @@ public class LoginUserDTO implements Serializable {
     /**
      * 用户账号
      */
-    private String userAccount;
+    private String username;
 
     /**
      * 姓名
      */
-    private String userName;
+    private String realName;
 
 }
