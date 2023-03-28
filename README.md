@@ -1,21 +1,22 @@
 # spring-boot-base
-基于SpringBoot快速开发项目脚手架  
+基于SpringBoot快速开发项目脚手架，前后的不分离版    
 
 中间件：  
 MySQL  
 Redis  
-RabbitMQ  
+RabbitMQ     
 
 框架：  
+Spring Boot  
 Mybatis Plus  
-Spring Data Redis  
+JetCache  
 Redisson  
 
-前端：
-Freemarker  
+前端：  
+Freemarker      
 Layui  
 Pear Admin  
 
-todo:  
-rbac体系  
+TODO:    
+RBAC体系    
 登录功能  
